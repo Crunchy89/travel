@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1>List Berita</h1>
+				<h1><?= $title ?></h1>
 			</div>
 		</div>
 	</div><!-- /.container-fluid -->
@@ -17,22 +17,20 @@
 						<h3 class="card-title">
 							Berita
 						</h3>
-						<div class="float-right"><a href="javascript:void(0);" class="btn btn-primary" data-toggle="modal" data-target="#Modal_Add"><i class="fas fa-plus"></i> Add New</a></div>
+						<div class="float-right"><button type="button" id="add_button" data-toggle="modal" data-target="#userModal" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah</button></div>
 					</div>
 					<div class="card-body pad table-responsive">
-						<table class="table table-bordered text-center" id="tabel_berita">
+						<table id="user_data" class="table table-bordered table-striped" style="width: 100%">
 							<thead>
 								<tr>
 									<th>No</th>
+									<th>Gambar</th>
 									<th>Judul Berita</th>
-									<th>Gambar</code></th>
-									<th>Tanggal Upload</code></th>
-									<th>Aksi</code></th>
+									<th>Tanggal Upload</th>
+									<th>Edit</th>
+									<th>Delete</th>
 								</tr>
 							</thead>
-							<tbody id="data_berita">
-
-							</tbody>
 						</table>
 					</div>
 					<!-- /.card -->
@@ -41,7 +39,22 @@
 		</div>
 </section>
 
-<div class="modal fade bd-example-modal-xl" data-backdrop="static" id="Modal_Add" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+
+<div class="toast" role="alert" id="success" aria-live="assertive" aria-atomic="true" data-delay="5000">
+	<div class="toast-header">
+		<strong class="mr-auto">Bootstrap</strong>
+		<small class="text-muted">just now</small>
+		<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="toast-body">
+	</div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-xl" data-backdrop="static" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -50,13 +63,13 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form id="berita_tambah">
+			<form id="berita_form" method="post">
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-9">
 							<div class="form-group">
 								<label>Judul Berita</label>
-								<input type="text" name="judul" class="form-control">
+								<input type="text" name="judul" id="judul" class="form-control">
 							</div>
 							<div class="form-group">
 								<label>Isi Berita</label>
@@ -78,108 +91,92 @@
 					</div>
 				</div>
 				<div class="modal-footer">
+					<input type="hidden" name="id_berita" id="id_berita">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-					<button type="button" class="btn btn-primary" id="btn_tambah">Tambah</button>
+					<input type="submit" class="btn btn-primary" name="action" id="action" value="Tambah">
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
-
-
-<script>
+<script type="text/javascript" language="javascript">
 	var loadFile = function(event) {
-		document.getElementById("file").innerHTML = document.getElementById("gambar").value;
 		var output = document.getElementById('output');
 		output.src = URL.createObjectURL(event.target.files[0]);
 	};
+
 	$(document).ready(function() {
-		show_product(); //call function show all product
+		$('#add_button').click(function() {
+			$('#berita_form')[0].reset();
+			$('.modal-title').text("Tulis Berita");
+			$('#action').val("Tambah");
+			$('#gambar').html('');
+		})
 
-		$('#tabel_berita').dataTable();
+		var dataTable = $('#user_data').DataTable({
+			"processing": true,
+			"serverSide": true,
+			"order": [],
+			"ajax": {
+				url: "<?= site_url('berita/fetch_user'); ?>",
+				type: "POST"
+			},
+			"columnDefs": [{
+				"targets": [0, 3, 4],
+				"orderable": false,
+			}, ],
+		});
 
-		//function show all product
-		function show_product() {
-			$.ajax({
-				type: 'ajax',
-				url: '<?php echo site_url('berita/tampil') ?>',
-				async: false,
-				dataType: 'json',
-				success: function(data) {
-					var html = '';
-					var i;
-					for (i = 0; i < data.length; i++) {
-						html += '<tr>' +
-							'<td>' + parseInt(i + 1) + '</td>' +
-							'<td>' + data[i].judul_berita + '</td>' +
-							'<td>' + data[i].gambar + '</td>' +
-							'<td>' + data[i].tanggal_berita + '</td>' +
-							'<td style="text-align:right;">' +
-							'<a href="javascript:void(0);" class="btn btn-info btn-sm item_edit" data-id="' + data[i].id_berita + '" data-judul="' + data[i].judul_berita + '" data-gambar="' + data[i].gambar + '">Edit</a>' + ' ' +
-							'<a href="javascript:void(0);" class="btn btn-danger btn-sm item_delete" data-product_code="' + data[i].id_beri + '">Delete</a>' +
-							'</td>' +
-							'</tr>';
-					}
-					$('#data_berita').html(html);
+		$(document).on('submit', '#berita_form', function(event) {
+			event.preventDefault();
+			var judul_berita = $('#judul').val();
+			var isi_berita = CKEDITOR.instances['ckeditor'].getData();
+			var extension = $('#gambar').val().split('.').pop().toLowerCase();
+			if (extension != '') {
+				if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+					alert("Invalid Image File");
+					$('#gambar').val('');
+					return false;
 				}
-
-			});
-		}
-	});
-
-	$('#btn_tambah').on('click', function() {
-		$.ajax({
-			url: '<?= site_url('berita/tambah') ?>',
-			type: 'POST',
-			data: $('#siswa').serialize(),
-			dataType: 'json',
-			success: function(data) {
-				$('#mydata').DataTable().ajax.reload();
-				$('[name="nama_save"]').val("");
-				$('[name="alamat_save"]').val("");
-				$('#Modal_Add').modal('hide');
+			}
+			if (judul_berita != '' && isi_berita != '') {
+				$.ajax({
+					url: "<?= site_url('berita/user_action') ?>",
+					method: 'POST',
+					data: new FormData(this),
+					contentType: false,
+					processData: false,
+					success: function(data) {
+						$('#berita_form')[0].reset();
+						$('#userModal').modal('hide');
+						$('.toast').toast('show');
+						$('.toast-body').html(data);
+						dataTable.ajax.reload();
+					}
+				});
+			} else {
+				alert("Bother Fields are Required");
 			}
 		});
-	});
-
-	$('#mydata').on('click', '.edit', function() {
-		var nama = $(this).data('nama_edit');
-		var alamat = $(this).data('alamat_edit');
-		var id = $(this).data('id_siswa');
-		$('#Modal_Edit').modal('show');
-		$('#nama_edit').val(nama);
-		$('#alamat_edit').val(alamat);
-		$('#id_edit').val(id);
-	});
-
-	$('#btn_edit').on('click', function() {
-		$.ajax({
-			url: '<?= site_url('home/edit') ?>',
-			type: 'POST',
-			data: $('#siswa_edit').serialize(),
-			dataType: 'json',
-			success: function(data) {
-				$('#mydata').DataTable().ajax.reload();
-				$('#Modal_Edit').modal('hide');
-			}
-		});
-	});
-
-	$('#mydata').on('click', '.hapus', function() {
-		var id = $(this).data('id_siswa');
-		$('#Modal_hapus').modal('show');
-		$('#id_hapus').val(id);
-	});
-	$('#btn_hapus').on('click', function() {
-		$.ajax({
-			url: '<?= site_url('home/hapus') ?>',
-			type: 'POST',
-			data: $('#siswa_hapus').serialize(),
-			dataType: 'json',
-			success: function(data) {
-				$('#mydata').DataTable().ajax.reload();
-				$('#Modal_hapus').modal('hide');
-			}
+		$(document).on('click', '.update', function() {
+			var id_berita = $(this).attr("id");
+			$.ajax({
+				url: "<?= site_url('berita/fetch_single_user'); ?>",
+				method: "POST",
+				data: {
+					id_berita: id_berita
+				},
+				dataType: "json",
+				success: function(data) {
+					$('#userModal').modal('show');
+					$('#judul').val(data.judul_berita);
+					CKEDITOR.instances['ckeditor'].setData(data.isi_berita);
+					$('.modal-title').text("Edit User");
+					$('#id_berita').val(id_berita);
+					$('#output').html(data.gambar);
+					$('#action').val("Edit");
+				}
+			})
 		});
 	});
 </script>

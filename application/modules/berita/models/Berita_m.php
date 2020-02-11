@@ -1,62 +1,57 @@
 <?php
 class Berita_m extends CI_Model
 {
-    public function tampil()
+    var $table = "berita";
+    var $select_column = array("id_berita", "judul_berita", "isi_berita", "gambar", "tanggal_berita");
+    var $order_column = array("id_berita", "judul_berita", 'isi_berita', "gambar", "tanggal_berita");
+    function make_query()
     {
-        return $this->db->get('berita')->result();
-    }
-    public function tambah()
-    {
-        $gambar = $this->_uploadImage();
-        $date = date('Y/m/d');
-        $data = [
-            'judul_berita' => $this->input->post('judul'),
-            'isi_berita' => $this->input->post('isi'),
-            'gambar' => $gambar,
-            'tanggal_berita' => $date
-        ];
-        return $this->db->insert('berita', $data);
-    }
-    public function edit()
-    {
-        $gambar_lama = $this->input->post('gambarLama');
-        if ($_FILES["gambar"]["name"]) {
-            $gambar = $this->_uploadImage();
-            if ($gambar_lama != $gambar || $gambar_lama != "noimage.png") {
-                unlink("assets/img/berita/$gambar_lama");
-            }
+        $this->db->select($this->select_column);
+        $this->db->from($this->table);
+        if (isset($_POST["search"]["value"])) {
+            $this->db->like("judul_berita", $_POST["search"]["value"]);
+            $this->db->or_like("tanggal_berita", $_POST["search"]["value"]);
+        }
+        if (isset($_POST["order"])) {
+            $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
-            $gambar = $gambar_lama;
+            $this->db->order_by('id_berita', 'DESC');
         }
-        $data = [
-            'judul_berita' => $this->input->post('judul'),
-            'isi_berita' => $this->input->post('isi'),
-            'gambar' => $gambar
-        ];
-        $this->db->where('id_berita', $this->input->post('id'));
-        return $this->db->update('berita', $data);
     }
-    public function delete()
+    function make_datatables()
     {
-        $id = $this->input->post('id');
-        $inv = $this->db->query("SELECT gambar FROM inventaris WHERE id_inv = $id")->row();
-        if ($inv->gambar != 'noimage.png') {
-            unlink("assets/img/berita/$inv->gambar");
+        $this->make_query();
+        if ($_POST["length"] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
         }
-        $this->db->where('id_berita', $id);
-        return $this->db->delete('berita');
+        $query = $this->db->get();
+        return $query->result();
     }
-    private function _uploadImage()
+    function get_filtered_data()
     {
-        $config['upload_path']          = 'assets/img/berita/';
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 1024;
-
-        $this->load->library('upload', $config);
-
-        if ($this->upload->do_upload('gambar')) {
-            return $this->upload->data("file_name");
-        }
-        return "noimage.png";
+        $this->make_query();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+    function get_all_data()
+    {
+        $this->db->select("*");
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+    function insert_crud($data)
+    {
+        $this->db->insert('berita', $data);
+    }
+    function fetch_single_user($id_berita)
+    {
+        $this->db->where("id_berita", $id_berita);
+        $query = $this->db->get('berita');
+        return $query->result();
+    }
+    function update_crud($id_berita, $data)
+    {
+        $this->db->where("id_berita", $id_berita);
+        $this->db->update("berita", $data);
     }
 }
