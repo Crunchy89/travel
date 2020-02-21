@@ -49,10 +49,10 @@
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
+            <a href="<?= site_url('profile') ?>" class="dropdown-item">
               <i class="fas fa-user mr-2"></i> Profile
             </a>
-            <a href="#" class="dropdown-item">
+            <a href="<?= site_url('admin/logout') ?>" class="dropdown-item">
               <i class="fas fa-sign-out-alt mr-2"></i> Logout
             </a>
           </div>
@@ -64,8 +64,8 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
-        <img src="" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <a href="<?= site_url('dashboard') ?>" class="brand-link">
+        <img src="<?= base_url() ?>assets/img/user.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Admin</span>
       </a>
 
@@ -82,7 +82,6 @@
               </p>
             </a>
           </li>
-
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-fw fa-laptop"></i>
@@ -93,27 +92,56 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="<?= site_url('promo') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Promo</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="<?= site_url('beritas') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Berita</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="<?= site_url('paket') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Paket</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a href="<?= site_url('destinasi') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Destinasi</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-fw fa-laptop"></i>
+              <p>
+                Menu Admin
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= site_url('medsos') ?>" class="nav-link">
+                  <i class="fab fa-facebook-f nav-icon"></i>
+                  <p>Medsos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url('profile') ?>" class="nav-link">
+                  <i class="fas fa-user nav-icon"></i>
+                  <p>Profile</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url('admin/logout') ?>" class="nav-link">
+                  <i class="fas fa-sign-out-alt nav-icon"></i>
+                  <p>Logout</p>
                 </a>
               </li>
             </ul>

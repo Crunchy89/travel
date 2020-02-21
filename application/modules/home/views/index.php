@@ -42,19 +42,6 @@
     </div>
 </div>
 
-
-<!-- <div class="hero-wrap js-fullheight" style="background-image: url('<?= base_url() ?>assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-            <div class="col-md-7 ftco-animate mt-5" data-scrollax=" properties: { translateY: '70%' }">
-                <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Be Stranger in Paradise</h1>
-                <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Travel to the any corner of the lombok, with Ours Agent Tour</p>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <section class="ftco-section ftco-no-pb ftco-no-pt">
     <div class="container">
         <div class="row">
