@@ -56,9 +56,9 @@ class Berita extends MY_Controller
 				$gambar = $this->input->post("hidden_user_image");
 			}
 			$updated_data = array(
-				'judul_berita'          =>     $this->input->post('judul'),
-				'isi_berita'               =>     $this->input->post('isi'),
-				'gambar'                    =>     $gambar
+				'judul_berita' => $this->input->post('judul'),
+				'isi_berita' => $this->input->post('isi'),
+				'gambar' => $gambar
 			);
 			$this->berita_m->update_crud($this->input->post("id_berita"), $updated_data);
 			echo 'Data Updated';
