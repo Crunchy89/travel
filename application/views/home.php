@@ -32,12 +32,12 @@
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="destination.html" class="nav-link">Destination</a></li>
-          <li class="nav-item"><a href="hotel-resto.html" class="nav-link">Tour</a></li>
-          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+          <li class="nav-item active"><a href="<?= site_url('home') ?>" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="<?= site_url('home/about') ?>" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="<?= site_url('home/place') ?>" class="nav-link">Place</a></li>
+          <li class="nav-item"><a href="<?= site_url('home/tour') ?>" class="nav-link">Tour</a></li>
+          <li class="nav-item"><a href="<?= site_url('home/news') ?>" class="nav-link">News</a></li>
+          <li class="nav-item"><a href="<?= site_url('home/contact') ?>" class="nav-link">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -45,7 +45,7 @@
   <!-- END nav -->
   <?= $view ?>
 
-  <section class="ftco-subscribe" style="background-image: url('<?= base_url() ?>assets/images/bg_1.jpg');">
+  <!-- <section class="ftco-subscribe">
     <div class="overlay">
       <div class="container">
         <div class="row d-flex justify-content-center">
@@ -65,10 +65,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
 
-  <footer class="ftco-footer ftco-footer-2 ftco-section">
+  <footer class="ftco-footer ftco-footer-2 ftco-section mt-5">
     <div class="container">
       <div class="row mb-5">
         <div class="col-md">
