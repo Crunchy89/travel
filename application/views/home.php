@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/flaticon.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/icomoon.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css">
+  <script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -144,7 +146,6 @@
       <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
 
 
-  <script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
   <script src="<?= base_url() ?>assets/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="<?= base_url() ?>assets/js/popper.min.js"></script>
   <script src="<?= base_url() ?>assets/js/bootstrap.min.js"></script>

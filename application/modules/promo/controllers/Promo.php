@@ -16,10 +16,7 @@ class Promo extends MY_Controller
 	function getLists()
 	{
 		$data = array();
-
-		// Fetch member's records
 		$memData = $this->model->getRows($_POST);
-
 		$i = $_POST['start'];
 		foreach ($memData as $member) {
 			$i++;
@@ -28,7 +25,6 @@ class Promo extends MY_Controller
 			$btn_hapus = '<a href="#" class="btn btn-danger btn-sm hapus"  data-id_promo="' . $member->id_promo . '"><i class="fas fa-fw fa-trash"></i> Hapus</a>';
 			$data[] = array($i, $gambar, $member->judul, $member->isi, $btn_edit . ' ' . $btn_hapus);
 		}
-
 		$output = array(
 			"draw" => $_POST['draw'],
 			"recordsTotal" => $this->model->countAll(),
@@ -45,8 +41,6 @@ class Promo extends MY_Controller
 	}
 	public function edit()
 	{
-
-
 		$result = $this->model->edit();
 
 		echo json_encode($result);

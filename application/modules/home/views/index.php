@@ -1,44 +1,38 @@
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <div class="hero-wrap js-fullheight" style="background-image: url('<?= base_url() ?>assets/a.jpg');" data-stellar-background-ratio="0.5">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-                        <div class="col-md-7 ftco-animate mt-5" data-scrollax=" properties: { translateY: '70%' }">
-                            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Be Stranger in Paradise</h1>
-                            <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Travel to the any corner of the lombok, with Ours Agent Tour</p>
+        <?php $i = 1;
+        foreach ($promo as $row) :
+            if ($i === 1) : ?>
+                <div class="carousel-item active">
+                    <div class="hero-wrap js-fullheight" style="background-image: url('<?= base_url("assets/img/promo/") . $row->gambar ?>');" data-stellar-background-ratio="0.5">
+                        <div class="overlay"></div>
+                        <div class="container">
+                            <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
+                                <div class="col-md-7 ftco-animate mt-5" data-scrollax=" properties: { translateY: '70%' }">
+                                    <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><?= $row->judul ?></h1>
+                                    <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><?= $row->isi ?></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="hero-wrap js-fullheight" style="background-image: url('<?= base_url() ?>assets/b.jpg');" data-stellar-background-ratio="0.5">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-                        <div class="col-md-7 ftco-animate mt-5" data-scrollax=" properties: { translateY: '70%' }">
-                            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Be Stranger in Paradise</h1>
-                            <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Travel to the any corner of the lombok, with Ours Agent Tour</p>
+            <?php else : ?>
+                <div class="carousel-item">
+                    <div class="hero-wrap js-fullheight" style="background-image: url('<?= base_url('assets/img/promo/') . $row->gambar ?>');" data-stellar-background-ratio="0.5">
+                        <div class="overlay"></div>
+                        <div class="container">
+                            <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
+                                <div class="col-md-7 ftco-animate mt-5" data-scrollax=" properties: { translateY: '70%' }">
+                                    <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><?= $row->judul ?></h1>
+                                    <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><?= $row->isi ?></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="hero-wrap js-fullheight" style="background-image: url('<?= base_url() ?>assets/c.jpg');" data-stellar-background-ratio="0.5">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-                        <div class="col-md-7 ftco-animate mt-5" data-scrollax=" properties: { translateY: '70%' }">
-                            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Be Stranger in Paradise</h1>
-                            <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Travel to the any corner of the lombok, with Ours Agent Tour</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php endif;
+            $i++;
+        endforeach; ?>
     </div>
 </div>
 

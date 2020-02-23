@@ -113,9 +113,9 @@ class Promo_model extends CI_Model
             $config['source_image'] = './assets/img/promo/' . $gbr['file_name'];
             $config['create_thumb'] = FALSE;
             $config['maintain_ratio'] = FALSE;
-            $config['quality'] = '50%';
-            $config['width'] = 1024;
-            $config['height'] = 768;
+            $config['quality'] = '100%';
+            $config['width'] = 1219;
+            $config['height'] = 599;
             $config['new_image'] = './assets/img/promo/' . $gbr['file_name'];
             $this->load->library('image_lib', $config);
             $this->image_lib->resize();
