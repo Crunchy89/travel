@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <script src="<?= base_url() ?>assets/ckeditor/ckeditor.js"></script>
+  <script src="<?= base_url() ?>assets/ckeditor.js"></script>
   <script src="<?= base_url() ?>assets/plugins/jquery/jquery.js"></script>
   <!-- Bootstrap 4 -->
   <script src="<?= base_url() ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -75,7 +75,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -98,7 +98,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= site_url('beritas') ?>" class="nav-link">
+                <a href="<?= site_url('berita') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Berita</p>
                 </a>
