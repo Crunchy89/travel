@@ -77,7 +77,7 @@ class Berita_m extends CI_Model
         $gambar_lama = $this->input->post('gambarLama');
         if ($_FILES['gambar']['name']) {
             $upload = $this->_uploadImage();
-            if ($gambar_lama != $upload || $gambar_lama != "noimage.png") {
+            if ($gambar_lama != "noimage.png") {
                 unlink("assets/img/" . $this->table . "/" . $gambar_lama . "");
             }
         } else {

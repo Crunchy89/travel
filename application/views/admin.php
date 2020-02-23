@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <script src="<?= base_url() ?>assets/ckeditor.js"></script>
+  <script src="<?= base_url() ?>assets/ckeditor/ckeditor.js"></script>
   <script src="<?= base_url() ?>assets/plugins/jquery/jquery.js"></script>
   <!-- Bootstrap 4 -->
   <script src="<?= base_url() ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

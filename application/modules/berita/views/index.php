@@ -42,10 +42,7 @@
 </section>
 <?php include "modal.php" ?>
 <script>
-    function masuk() {
-        var cek = CKEDITOR.instances['ckeditor'].getData();
-        $('#isi').val(cek);
-    }
+    CKEDITOR.replaceClass = 'ckeditor';
     var loadFile = function(event) {
         var output = document.getElementById('output');
         output.src = URL.createObjectURL(event.target.files[0]);
@@ -73,6 +70,9 @@
     $(document).ready(function() {
 
         $('#form_tambah').submit(function(e) {
+            for (instance in CKEDITOR.instances) {
+                CKEDITOR.instances['ckeditor'].updateElement();
+            }
             e.preventDefault();
             $.ajax({
                 url: "<?= site_url('berita/tambah'); ?>",
@@ -100,12 +100,15 @@
             $('#Modal_edit').modal('show');
             $('#id_edit').val(id);
             $('#judul_edit').val(judul);
-            CKEDITOR.instances['ckeditor'].setData(isi);
+            CKEDITOR.instances['ckeditor2'].setData(isi);
             $('#gambarLama').val(gambar);
-            $('#hasil').html('<img class="img-fluid" width="200px" src="<?= base_url() ?>assets/img/promo/' + gambar + '" id="output2">');
+            $('#hasil').html('<img class="img-fluid" width="200px" src="<?= base_url() ?>assets/img/berita/' + gambar + '" id="output2">');
         });
 
         $('#form_edit').submit(function(e) {
+            for (instance in CKEDITOR.instances) {
+                CKEDITOR.instances['ckeditor2'].updateElement();
+            }
             e.preventDefault();
             $.ajax({
                 url: "<?= site_url('berita/edit'); ?>",
@@ -139,13 +142,5 @@
                 }
             });
         });
-
-
     });
-
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .catch(error => {
-            console.error(error);
-        });
 </script>

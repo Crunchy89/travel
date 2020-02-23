@@ -18,7 +18,7 @@
                                     <input type="text" name="judul" id="judul" class="form-control form-control-sm" placeholder="Judul">
                                 </div>
                                 <div class="form-group">
-                                    <label for="ckeditor">Isi Berita</label>
+                                    <label for="ckeditor">Berita</label>
                                     <textarea name="isi" id="ckeditor" class="ckeditor"></textarea>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="isi">Isi Berita</label>
-                                    <textarea name="isi" id="ckeditor" class="ckeditor"></textarea>
+                                    <textarea name="isi" id="ckeditor2" class="ckeditor"></textarea>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -93,7 +93,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary" id="btn_tambah">Simpan</button>
+                    <button type="submit" class="btn btn-primary" id="btn_edit">Simpan</button>
                 </div>
             </form>
         </div>
