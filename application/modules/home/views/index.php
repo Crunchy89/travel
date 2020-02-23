@@ -494,64 +494,30 @@
     <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
             <div class="col-md-7 heading-section text-center ftco-animate">
-                <h2>Recent Stories</h2>
+                <h2>News</h2>
             </div>
         </div>
         <div class="row d-flex">
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry justify-content-end">
-                    <a href="blog-single.html" class="block-20" style="background-image: url('<?= base_url() ?>assets/images/image_1.jpg');">
-                    </a>
-                    <div class="text mt-3 float-right d-block">
-                        <div class="d-flex align-items-center pt-2 mb-4 topp">
-                            <div class="one">
-                                <span class="day">12</span>
+            <?php foreach ($berita as $row) : ?>
+                <div class="col-md-4 d-flex ftco-animate">
+                    <div class="blog-entry justify-content-end">
+                        <a href="blog-single.html" class="block-20" style="background-image: url('<?= base_url('assets/img/berita/') . $row->gambar ?>');">
+                        </a>
+                        <div class="text mt-3 float-right d-block">
+                            <div class="d-flex align-items-center pt-2 mb-4 topp">
+                                <div class="one">
+                                    <span class="day"><?= date('d', strtotime($row->tanggal_berita)) ?></span>
+                                </div>
+                                <div class="two">
+                                    <span class="yr"><?= date('Y', strtotime($row->tanggal_berita)) ?></span>
+                                    <span class="mos"><?= date('M', strtotime($row->tanggal_berita)) ?></span>
+                                </div>
                             </div>
-                            <div class="two">
-                                <span class="yr">2019</span>
-                                <span class="mos">February</span>
-                            </div>
+                            <h3 class="heading"><a href="#"><?= $row->judul_berita ?></a></h3>
                         </div>
-                        <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry justify-content-end">
-                    <a href="blog-single.html" class="block-20" style="background-image: url('<?= base_url() ?>assets/images/image_2.jpg');">
-                    </a>
-                    <div class="text mt-3 float-right d-block">
-                        <div class="d-flex align-items-center pt-2 mb-4 topp">
-                            <div class="one">
-                                <span class="day">12</span>
-                            </div>
-                            <div class="two">
-                                <span class="yr">2019</span>
-                                <span class="mos">February</span>
-                            </div>
-                        </div>
-                        <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry">
-                    <a href="blog-single.html" class="block-20" style="background-image: url('<?= base_url() ?>assets/images/image_3.jpg');">
-                    </a>
-                    <div class="text mt-3 float-right d-block">
-                        <div class="d-flex align-items-center pt-2 mb-4 topp">
-                            <div class="one">
-                                <span class="day">12</span>
-                            </div>
-                            <div class="two">
-                                <span class="yr">2019</span>
-                                <span class="mos">February</span>
-                            </div>
-                        </div>
-                        <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>

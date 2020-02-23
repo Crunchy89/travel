@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/open-iconic-bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/animate.css">
+  <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/owl.carousel.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/owl.theme.default.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/magnific-popup.css">
@@ -47,29 +48,6 @@
   <!-- END nav -->
   <?= $view ?>
 
-  <!-- <section class="ftco-subscribe">
-    <div class="overlay">
-      <div class="container">
-        <div class="row d-flex justify-content-center">
-          <div class="col-md-10 text-wrap text-center heading-section ftco-animate">
-            <h2>Subcribe to our Newsletter</h2>
-            <div class="row d-flex justify-content-center mt-4 mb-4">
-              <div class="col-md-10">
-                <form action="#" class="subscribe-form">
-                  <div class="form-group d-flex">
-                    <input type="text" class="form-control" placeholder="Enter email address">
-                    <input type="submit" value="Subscribe" class="submit px-3">
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-
-
   <footer class="ftco-footer ftco-footer-2 ftco-section mt-5">
     <div class="container">
       <div class="row mb-5">
@@ -78,9 +56,10 @@
             <h2 class="ftco-heading-2">Traveland</h2>
             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
             <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              <?php $medsos = $this->db->get('medsos')->result();
+              foreach ($medsos as $row) : ?>
+                <li class="ftco-animate"><a href="<?= $row->link ?>"><span class="<?= $row->icon ?>"></span></a></li>
+              <?php endforeach; ?>
             </ul>
           </div>
         </div>

@@ -65,7 +65,7 @@ class Berita_m extends CI_Model
         $upload = $this->_uploadImage();
         $data = [
             'judul_berita' => htmlspecialchars($this->input->post('judul')),
-            'isi_berita' => $this->input->post('isi'),
+            'isi_berita' => htmlspecialchars($this->input->post('isi')),
             'tanggal_berita' => date('Y/m/d'),
             'gambar' => $upload
         ];
@@ -85,7 +85,7 @@ class Berita_m extends CI_Model
         }
         $data = [
             'judul_berita' => htmlspecialchars($this->input->post('judul')),
-            'isi_berita' => $this->input->post('isi'),
+            'isi_berita' => htmlspecialchars($this->input->post('isi')),
             'gambar' => $upload
         ];
         $this->db->where($this->nama_id, $id);
@@ -105,7 +105,7 @@ class Berita_m extends CI_Model
     private function _uploadImage()
     {
         $config['upload_path']          = 'assets/img/' . $this->table . '/';
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
 
         $this->load->library('upload', $config);
 

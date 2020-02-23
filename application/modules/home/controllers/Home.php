@@ -12,7 +12,7 @@ class Home extends MY_Controller
 
 	public function index()
 	{
-		$data['promo'] = $this->model->promo();
+		$data = $this->model->data();
 		front_page('index', $data);
 	}
 	public function about()

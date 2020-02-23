@@ -104,7 +104,7 @@ class Promo_model extends CI_Model
     private function _uploadImage()
     {
         $config['upload_path']          = 'assets/img/' . $this->table . '/';
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
 
         $this->load->library('upload', $config);
 
