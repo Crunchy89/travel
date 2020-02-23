@@ -4,6 +4,7 @@ class Promo_model extends CI_Model
     function __construct()
     {
         $this->table = 'promo';
+        $this->nama_id = 'id_promo';
         $this->column_order = array(null, 'gambar', 'judul', 'isi');
         $this->column_search = array('judul');
         $this->order = array('id_promo' => 'desc');
@@ -86,18 +87,18 @@ class Promo_model extends CI_Model
             'isi' => htmlspecialchars($this->input->post('isi')),
             'gambar' => $upload
         ];
-        $this->db->where('id_promo', $id);
+        $this->db->where($this->nama_id, $id);
         $result = $this->db->update($this->table, $data);
         return $result;
     }
     public function delete()
     {
         $id = $this->input->post('id');
-        $inv = $this->db->query("SELECT gambar FROM $this->table WHERE id_promo = $id")->row();
+        $inv = $this->db->query("SELECT gambar FROM $this->table WHERE $this->nama_id = $id")->row();
         if ($inv->gambar != 'noimage.png') {
-            unlink("assets/img/$this->table/$inv->gambar");
+            unlink("assets/img/" . $this->table . "/" . $inv->gambar . "");
         }
-        $this->db->where('id_promo', $id);
+        $this->db->where($this->nama_id, $id);
         return $this->db->delete($this->table);
     }
     private function _uploadImage()
@@ -110,13 +111,13 @@ class Promo_model extends CI_Model
         if ($this->upload->do_upload('gambar')) {
             $gbr = $this->upload->data();
             $config['image_library'] = 'gd2';
-            $config['source_image'] = './assets/img/promo/' . $gbr['file_name'];
+            $config['source_image'] = './assets/img/' . $this->table . '/' . $gbr['file_name'];
             $config['create_thumb'] = FALSE;
             $config['maintain_ratio'] = FALSE;
             $config['quality'] = '100%';
             $config['width'] = 1219;
             $config['height'] = 599;
-            $config['new_image'] = './assets/img/promo/' . $gbr['file_name'];
+            $config['new_image'] = './assets/img/' . $this->table . '/' . $gbr['file_name'];
             $this->load->library('image_lib', $config);
             $this->image_lib->resize();
 
