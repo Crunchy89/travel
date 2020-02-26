@@ -1,8 +1,8 @@
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
         <?php $i = 1;
         foreach ($promo as $row) :
-            if ($i === 1) : ?>
+            if ($i == 1) : ?>
                 <div class="carousel-item active">
                     <div class="hero-wrap js-fullheight" style="background-image: url('<?= base_url("assets/img/promo/") . $row->gambar ?>');" data-stellar-background-ratio="0.5">
                         <div class="overlay"></div>
@@ -33,10 +33,18 @@
         <?php endif;
             $i++;
         endforeach; ?>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 </div>
 
-<section class="ftco-section ftco-no-pb ftco-no-pt">
+<!-- <section class="ftco-section ftco-no-pb ftco-no-pt">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -83,7 +91,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <section class="ftco-section">
     <div class="container">
