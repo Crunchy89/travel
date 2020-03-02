@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/icomoon.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css">
   <script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
+  <!-- <script src="<?= base_url() ?>assets/js/costum.js"></script> -->
 
 </head>
 

@@ -15,6 +15,11 @@ class Home extends MY_Controller
 		$data = $this->model->data();
 		front_page('index', $data);
 	}
+	public function getData()
+	{
+		$data = $this->model->data();
+		echo json_encode($data);
+	}
 	public function about()
 	{
 		front_page('about');
