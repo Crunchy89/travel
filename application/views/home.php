@@ -1,11 +1,12 @@
+<?php $data = $this->db->get('profile')->row() ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <title>Traveland</title>
+  <title><?= $data->nama ?></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  <link rel="icon" href="<?= base_url('assets/img/') . $data->logo ?>">
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/open-iconic-bootstrap.min.css">
@@ -29,7 +30,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html"><span>Logo Travel</span></a>
+      <a class="navbar-brand" href="index.html"><span><img src="<?= base_url('assets/img/') . $data->logo ?>" width="50" alt="Logo"></span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
@@ -54,8 +55,8 @@
       <div class="row mb-5">
         <div class="col-md">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Traveland</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+            <h2 class="ftco-heading-2"><?= $data->nama ?></h2>
+            <p><?= $data->about ?></p>
             <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
               <?php $medsos = $this->db->get('medsos')->result();
               foreach ($medsos as $row) : ?>
@@ -95,9 +96,9 @@
             <h2 class="ftco-heading-2">Have a Questions?</h2>
             <div class="block-23 mb-3">
               <ul>
-                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                <li><span class="icon icon-map-marker"></span><span class="text"><?= $data->alamat ?></span></li>
+                <li><a href="#"><span class="icon icon-phone"></span><span class="text"><?= $data->no_kantor ?></span></a></li>
+                <li><a href="#"><span class="icon icon-envelope"></span><span class="text"><?= $data->email ?></span></a></li>
               </ul>
             </div>
           </div>
