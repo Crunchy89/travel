@@ -63,4 +63,19 @@ class Destinasi extends MY_Controller
 		$result = $this->model->getData($id);
 		echo json_encode($result);
 	}
+	public function tambah_gambar($id)
+	{
+		$result = $this->model->tambah_gambar($id);
+		echo json_encode($result);
+	}
+	public function hapus_gambar()
+	{
+		$result = $this->model->hapus_gambar();
+		echo json_encode($result);
+	}
+	public function hapus_semua($id)
+	{
+		$result = $this->model->hapus_gambar($id);
+		echo json_encode($result);
+	}
 }

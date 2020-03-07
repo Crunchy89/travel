@@ -85,7 +85,55 @@ class Destinasi_model extends CI_Model
     }
     public function getData($id)
     {
-        $result = $this->db->get_where($this->table, [$this->id => $id])->result();
+        $result = $this->db->get_where('gambar_destinasi', ['id_destinasi' => $id])->result();
+        return $result;
+    }
+    public function tambah_gambar($id)
+    {
+        $hit = count($_FILES['gambar']['name']);
+        if ($_FILES['gambar']['name']) {
+            $output = 'noimage.png';
+            $config['upload_path']          = 'assets/img/' . $this->table . '/';
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            for ($i = 0; $i < $hit; $i++) {
+                $_FILES['foto']['name'] = $_FILES['gambar']['name'][$i];
+                $_FILES['foto']['type'] = $_FILES['gambar']['type'][$i];
+                $_FILES['foto']['tmp_name'] = $_FILES['gambar']['tmp_name'][$i];
+                $_FILES['foto']['error'] = $_FILES['gambar']['error'][$i];
+                $_FILES['foto']['size'] = $_FILES['gambar']['size'][$i];
+                if ($this->upload->do_upload('foto')) {
+                    $nama = $this->upload->data();
+                    $data = [
+                        'gambar' => $nama['file_name'],
+                        'id_destinasi' => $id
+                    ];
+                }
+                $arr[] = $this->db->insert('gambar_destinasi', $data);
+            }
+            return $arr;
+        }
+    }
+    public function hapus_gambar()
+    {
+        $result = $this->input->post('id');
+        foreach ($result as $row) {
+            $nama = $this->db->get_where('gambar_destinasi', ['id_gambar' => $row])->row();
+            unlink("assets/img/" . $this->table . "/" . $nama->gambar . "");
+            $this->db->where('id_gambar', $row);
+            $data[] = $this->db->delete('gambar_destinasi');
+        }
+        echo json_encode($data);
+    }
+    public function hapus_semua($id)
+    {
+        $data = $this->db->get_where('gambar_destinasi', ['id_destinasi' => $id])->result();
+        foreach ($data as $d) {
+            unlink("assets/img/" . $this->table . "/" . $d->gambar . "");
+        }
+        $this->db->where('id_destinasi', $id);
+        $result = $this->db->delete('gambar_destinasi');
         echo json_encode($result);
     }
 }
