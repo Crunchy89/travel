@@ -181,7 +181,7 @@
         </div>
     </div>
 </section>
-
+<!-- 
 <section class="ftco-counter img" id="section-counter">
     <div class="container">
         <div class="row d-flex">
@@ -232,31 +232,35 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center pb-5">
             <div class="col-md-12 heading-section text-center ftco-animate">
                 <h2 class="mb-4">Destinasi</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                <p>Destinasi wisata yang kami sediakan</p>
             </div>
         </div>
-        <div class="row">
-            <?php $data = $this->db->query("SELECT * FROM destinasi ORDER BY id_destinasi DESC limit 3")->result();
+        <div class="owl-carousel owl-stage">
+            <?php $data = $this->db->query("SELECT * FROM destinasi ORDER BY id_destinasi DESC")->result();
             foreach ($data as $row) : ?>
-                <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="ftco-animate items" style="width: 270px">
                     <div class="project">
                         <div class="img">
-
-                            <img src="<?= base_url('assets/img/foto/') . $row->foto ?>" class="img-fluid" alt="Colorlib Template">
+                            <img src="<?= base_url('assets/img/foto/') . $row->foto ?>" class="img-fluid" alt="Foto" data-toggle="modal" data-target="#foto<?= $row->id_destinasi ?>">
                         </div>
                         <div class="text">
-                            <h3><a href="project.html"><?= $row->nama_destinasi ?></a></h3>
+                            <h3><?= $row->nama_destinasi ?></h3>
                         </div>
-                        <a href="<?= base_url() ?>assets/images/destination-1.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
-                            <span class="icon-expand"></span>
-                        </a>
+                    </div>
+                </div>
+
+                <div class="modal fade bd-example-modal-lg" id="foto<?=$row->id_destinasi?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            ...
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -265,7 +269,7 @@
 </section>
 
 
-<section class="ftco-counter img" id="section-counter">
+<!-- <section class="ftco-counter img" id="section-counter">
     <div class="container">
         <div class="row d-flex">
             <div class="col-md-6 order-md-last d-flex">
@@ -357,7 +361,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <section class="ftco-section bg-light">
     <div class="container">
@@ -366,9 +370,9 @@
                 <h2>News</h2>
             </div>
         </div>
-        <div class="row d-flex" id="berita">
+        <div class="row d-flex owl-carousel" id="berita">
             <?php foreach ($berita as $row) : ?>
-                <div class="col-md-4 d-flex ftco-animate">
+                <div class="d-flex ftco-animate" style="width: 270px">
                     <div class="blog-entry justify-content-end">
                         <a href="blog-single.html" class="block-20" style="background-image: url('<?= base_url('assets/img/berita/') . $row->gambar ?>');">
                         </a>
@@ -390,35 +394,13 @@
         </div>
     </div>
 </section>
-<!-- <script>
+<script>
     $(document).ready(function() {
-        $.ajax({
-            type: 'post',
-            url: '<?= site_url('home/getDataIndex') ?>',
-            dataType: 'json',
-            success: function(data) {
-                for(var i=0;i<data.berita.lenght;i++){
-                    html='<div class="col-md-4 d-flex ftco-animate">'+
-                        '<div class="blog-entry justify-content-end">'+
-                            '<a href="blog-single.html" class="block-20" style="background-image: url("<?= base_url('assets/img/berita/') ?>'+data.berita[i].gambar+'");">'+
-                            '</a>'+
-                            '<div class="text mt-3 float-right d-block">'+
-                                '<div class="d-flex align-items-center pt-2 mb-4 topp">'+
-                                    // '<div class="one">'+
-                                    //     '<span class="day"><?= date('d', strtotime($row->tanggal_berita)) ?></span>'+
-                                    // '</div>'+
-                                    // '<div class="two">'+
-                                    //     '<span class="yr"><?= date('Y', strtotime($row->tanggal_berita)) ?></span>'+
-                                    //     '<span class="mos"><?= date('M', strtotime($row->tanggal_berita)) ?></span>'+
-                                    // '</div>'+
-                                '</div>'+
-                                '<h3 class="heading"><a href="#">'+data.berita[i].judul_berita+'</a></h3>'+
-                            '</div>'+
-                        '</div>'+
-                    '</div>'
-                    $('#berita').append(html);
-                }
-            }
+        $('.owl-carousel').owlCarousel({
+            margin: 10,
+            loop: false,
+            autoWidth: true,
+            items: 4
         });
     });
-</script> -->
+</script>
