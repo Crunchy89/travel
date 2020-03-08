@@ -63,15 +63,26 @@ class Destinasi_model extends CI_Model
     function tambah()
     {
         $data = [
-            'nama_destinasi' => htmlspecialchars($this->input->post('nama'))
+            'nama_destinasi' => htmlspecialchars($this->input->post('nama')),
+            'foto' => $this->_uploadImage()
         ];
         return $this->db->insert($this->table, $data);
     }
     function edit()
     {
         $id = $this->input->post('id');
+        $gambar_lama = $this->input->post('gambarLama');
+        if ($_FILES['gambar']['name']) {
+            $upload = $this->_uploadImage();
+            if ($gambar_lama != "noimage.png") {
+                unlink("assets/img/foto/" . $gambar_lama . "");
+            }
+        } else {
+            $upload = $gambar_lama;
+        }
         $data = [
-            'nama_destinasi' => htmlspecialchars($this->input->post('nama'))
+            'nama_destinasi' => htmlspecialchars($this->input->post('nama')),
+            'foto' => $upload
         ];
         $this->db->where($this->id, $id);
         $result = $this->db->update($this->table, $data);
@@ -92,7 +103,6 @@ class Destinasi_model extends CI_Model
     {
         $hit = count($_FILES['gambar']['name']);
         if ($_FILES['gambar']['name']) {
-            $output = 'noimage.png';
             $config['upload_path']          = 'assets/img/' . $this->table . '/';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $this->load->library('upload', $config);
@@ -105,8 +115,20 @@ class Destinasi_model extends CI_Model
                 $_FILES['foto']['size'] = $_FILES['gambar']['size'][$i];
                 if ($this->upload->do_upload('foto')) {
                     $nama = $this->upload->data();
+                    $config['image_library'] = 'gd2';
+                    $config['source_image'] = './assets/img/' . $this->table . '/' . $nama['file_name'];
+                    $config['create_thumb'] = FALSE;
+                    $config['maintain_ratio'] = FALSE;
+                    $config['quality'] = '100%';
+                    $config['width'] = 800;
+                    $config['height'] = 1000;
+                    $config['new_image'] = './assets/img/' . $this->table . '/' . $nama['file_name'];
+                    $this->load->library('image_lib');
+                    $this->image_lib->initialize($config);
+                    $this->image_lib->resize();
+
                     $data = [
-                        'gambar' => $nama['file_name'],
+                        'gambar' => $this->upload->data('file_name'),
                         'id_destinasi' => $id
                     ];
                 }
@@ -124,7 +146,7 @@ class Destinasi_model extends CI_Model
             $this->db->where('id_gambar', $row);
             $data[] = $this->db->delete('gambar_destinasi');
         }
-        echo json_encode($data);
+        return $data;
     }
     public function hapus_semua($id)
     {
@@ -134,6 +156,30 @@ class Destinasi_model extends CI_Model
         }
         $this->db->where('id_destinasi', $id);
         $result = $this->db->delete('gambar_destinasi');
-        echo json_encode($result);
+        return $result;
+    }
+    private function _uploadImage()
+    {
+        $config['upload_path']          = './assets/img/foto/';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('gambar')) {
+            $gbr = $this->upload->data();
+            $config['image_library'] = 'gd2';
+            $config['source_image'] = './assets/img/foto/' . $gbr['file_name'];
+            $config['create_thumb'] = FALSE;
+            $config['maintain_ratio'] = FALSE;
+            $config['quality'] = '100%';
+            $config['width'] = 800;
+            $config['height'] = 1000;
+            $config['new_image'] = './assets/img/foto/' . $gbr['file_name'];
+            $this->load->library('image_lib', $config);
+            $this->image_lib->resize();
+
+            return $this->upload->data("file_name");
+        }
+        return "noimage.png";
     }
 }

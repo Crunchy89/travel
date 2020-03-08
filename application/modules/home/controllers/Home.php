@@ -15,7 +15,7 @@ class Home extends MY_Controller
 		$data = $this->model->data();
 		front_page('index', $data);
 	}
-	public function getData()
+	public function getDataIndex()
 	{
 		$data = $this->model->data();
 		echo json_encode($data);

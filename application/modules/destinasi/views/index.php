@@ -30,6 +30,7 @@
 									<th>No</th>
 									<th>Destinasi</th>
 									<th>Foto Destinasi</th>
+									<th>Galeri Foto</th>
 									<th>Aksi</th>
 								</tr>
 							</thead>
@@ -44,6 +45,14 @@
 </section>
 <?php include "modal.php" ?>
 <script>
+	var loadFile = function(event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    };
+    var loadFile2 = function(event) {
+        var output2 = document.getElementById('output2');
+        output2.src = URL.createObjectURL(event.target.files[0]);
+    };
 	$(document).ready(function() {
 		var siswa;
 		siswa = $('#myData').DataTable({
@@ -73,6 +82,7 @@
 			success: function(data) {
 				$('#myData').DataTable().ajax.reload();
 				$('#form_tambah')[0].reset();
+				$('#reset').html('<img class="img-fluid" width="100px" src="<?= base_url() ?>assets/img/noimage.png" id="output">');
 				$('#Modal').modal('hide');
 			}
 		});
@@ -81,9 +91,12 @@
 	$('#myData').on('click', '.edit', function() {
 		var id = $(this).data('id_destinasi');
 		var nama = $(this).data('nama_destinasi_edit');
+		var foto = $(this).data('gambar_lama');
 		$('#Modal_edit').modal('show');
 		$('#nama_edit').val(nama);
 		$('#id_edit').val(id);
+		$('#gambarLama').val(foto);
+		$('#hasil').html('<img class="img-fluid" width="100px" src="<?= base_url() ?>assets/img/foto/' + foto + '" id="output2">');
 	});
 
 	$('#form_edit').submit(function(e) {

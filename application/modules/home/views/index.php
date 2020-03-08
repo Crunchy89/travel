@@ -44,54 +44,6 @@
     </div>
 </div>
 
-<!-- <section class="ftco-section ftco-no-pb ftco-no-pt">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="search-wrap-1 ftco-animate p-4">
-                    <form action="#" class="search-property-1">
-                        <div class="row">
-                            <div class="col-lg align-items-end">
-                                <div class="form-group">
-                                    <label for="#">Destination</label>
-                                    <div class="form-field">
-                                        <div class="icon"><span class="ion-ios-search"></span></div>
-                                        <input type="text" class="form-control" placeholder="Search place">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg align-items-end">
-                                <div class="form-group">
-                                    <label for="#">Check-in date</label>
-                                    <div class="form-field">
-                                        <div class="icon"><span class="ion-ios-calendar"></span></div>
-                                        <input type="text" class="form-control checkin_date" placeholder="Check In Date">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg align-items-end">
-                                <div class="form-group">
-                                    <label for="#">Check-out date</label>
-                                    <div class="form-field">
-                                        <div class="icon"><span class="ion-ios-calendar"></span></div>
-                                        <input type="text" class="form-control checkout_date" placeholder="Check Out Date">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg align-self-end">
-                                <div class="form-group">
-                                    <div class="form-field">
-                                        <Button type="submit" class="form-control btn btn-primary"><span class="ion-ios-search"></span> Search</Button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
 
 <section class="ftco-section">
     <div class="container">
@@ -286,119 +238,28 @@
     <div class="container">
         <div class="row justify-content-center pb-5">
             <div class="col-md-12 heading-section text-center ftco-animate">
-                <h2 class="mb-4">Best Place to Travel</h2>
+                <h2 class="mb-4">Destinasi</h2>
                 <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="project">
-                    <div class="img">
-                        <img src="<?= base_url() ?>assets/images/destination-1.jpg" class="img-fluid" alt="Colorlib Template">
-                    </div>
-                    <div class="text">
-                        <h4 class="price">$400</h4>
-                        <span>15 Days Tour</span>
-                        <h3><a href="project.html">Gurtnellen, Swetzerland</a></h3>
-                        <div class="star d-flex clearfix">
-                            <div class="mr-auto float-left">
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                            </div>
-                            <div class="float-right">
-                                <span class="rate"><a href="#">(120)</a></span>
-                            </div>
+            <?php $data = $this->db->query("SELECT * FROM destinasi ORDER BY id_destinasi DESC limit 3")->result();
+            foreach ($data as $row) : ?>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="project">
+                        <div class="img">
+
+                            <img src="<?= base_url('assets/img/foto/') . $row->foto ?>" class="img-fluid" alt="Colorlib Template">
                         </div>
-                    </div>
-                    <a href="<?= base_url() ?>assets/images/destination-1.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
-                        <span class="icon-expand"></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="project">
-                    <div class="img">
-                        <img src="<?= base_url() ?>assets/images/destination-2.jpg" class="img-fluid" alt="Colorlib Template">
-                    </div>
-                    <div class="text">
-                        <h4 class="price">$400</h4>
-                        <span>15 Days Tour</span>
-                        <h3><a href="project.html">Gurtnellen, Swetzerland</a></h3>
-                        <div class="star d-flex clearfix">
-                            <div class="mr-auto float-left">
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                            </div>
-                            <div class="float-right">
-                                <span class="rate"><a href="#">(120)</a></span>
-                            </div>
+                        <div class="text">
+                            <h3><a href="project.html"><?= $row->nama_destinasi ?></a></h3>
                         </div>
+                        <a href="<?= base_url() ?>assets/images/destination-1.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+                            <span class="icon-expand"></span>
+                        </a>
                     </div>
-                    <a href="<?= base_url() ?>assets/images/destination-2.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
-                        <span class="icon-expand"></span>
-                    </a>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="project">
-                    <div class="img">
-                        <img src="<?= base_url() ?>assets/images/destination-3.jpg" class="img-fluid" alt="Colorlib Template">
-                    </div>
-                    <div class="text">
-                        <h4 class="price">$400</h4>
-                        <span>15 Days Tour</span>
-                        <h3><a href="project.html">Gurtnellen, Swetzerland</a></h3>
-                        <div class="star d-flex clearfix">
-                            <div class="mr-auto float-left">
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                            </div>
-                            <div class="float-right">
-                                <span class="rate"><a href="#">(120)</a></span>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="<?= base_url() ?>assets/images/destination-3.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
-                        <span class="icon-expand"></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="project">
-                    <div class="img">
-                        <img src="<?= base_url() ?>assets/images/destination-4.jpg" class="img-fluid" alt="Colorlib Template">
-                    </div>
-                    <div class="text">
-                        <h4 class="price">$400</h4>
-                        <span>15 Days Tour</span>
-                        <h3><a href="project.html">Gurtnellen, Swetzerland</a></h3>
-                        <div class="star d-flex clearfix">
-                            <div class="mr-auto float-left">
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                            </div>
-                            <div class="float-right">
-                                <span class="rate"><a href="#">(120)</a></span>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="<?= base_url() ?>assets/images/destination-4.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
-                        <span class="icon-expand"></span>
-                    </a>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -505,7 +366,7 @@
                 <h2>News</h2>
             </div>
         </div>
-        <div class="row d-flex">
+        <div class="row d-flex" id="berita">
             <?php foreach ($berita as $row) : ?>
                 <div class="col-md-4 d-flex ftco-animate">
                     <div class="blog-entry justify-content-end">
@@ -529,3 +390,35 @@
         </div>
     </div>
 </section>
+<!-- <script>
+    $(document).ready(function() {
+        $.ajax({
+            type: 'post',
+            url: '<?= site_url('home/getDataIndex') ?>',
+            dataType: 'json',
+            success: function(data) {
+                for(var i=0;i<data.berita.lenght;i++){
+                    html='<div class="col-md-4 d-flex ftco-animate">'+
+                        '<div class="blog-entry justify-content-end">'+
+                            '<a href="blog-single.html" class="block-20" style="background-image: url("<?= base_url('assets/img/berita/') ?>'+data.berita[i].gambar+'");">'+
+                            '</a>'+
+                            '<div class="text mt-3 float-right d-block">'+
+                                '<div class="d-flex align-items-center pt-2 mb-4 topp">'+
+                                    // '<div class="one">'+
+                                    //     '<span class="day"><?= date('d', strtotime($row->tanggal_berita)) ?></span>'+
+                                    // '</div>'+
+                                    // '<div class="two">'+
+                                    //     '<span class="yr"><?= date('Y', strtotime($row->tanggal_berita)) ?></span>'+
+                                    //     '<span class="mos"><?= date('M', strtotime($row->tanggal_berita)) ?></span>'+
+                                    // '</div>'+
+                                '</div>'+
+                                '<h3 class="heading"><a href="#">'+data.berita[i].judul_berita+'</a></h3>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'
+                    $('#berita').append(html);
+                }
+            }
+        });
+    });
+</script> -->

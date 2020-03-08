@@ -84,17 +84,20 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Hapus</h5>
+                <h5 class="modal-title">Hapus Semua</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+                <form id="hapus_gambar">
+                    <input type="hidden" name="id_destinasi" value="<?= $this->uri->segment('3') ?>">
+                </form>
                 <h3>Apakah Anda Yakin ?</h3>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary" id="hapus_semua">Hapus Semua</button>
+                <button type="button" class="btn btn-primary" id="hapus_se">Hapus Semua</button>
             </div>
         </div>
     </div>
@@ -118,7 +121,7 @@
 
         function show_data() {
             $.ajax({
-                type: 'ajax',
+                type: 'post',
                 url: '<?php echo site_url('destinasi/getData/') . $this->uri->segment('3') ?>',
                 async: false,
                 dataType: 'json',
@@ -165,6 +168,19 @@
                 dataType: 'json',
                 success: function(data) {
                     $('#hapus').modal('hide');
+                    $('#data').html('');
+                    show_data();
+                }
+            });
+        });
+        $('#hapus_se').on('click', function() {
+            $.ajax({
+                url: '<?= site_url('destinasi/hapus_semua') ?>',
+                type: 'POST',
+                data: $('#hapus_gambar').serialize(),
+                dataType: 'json',
+                success: function(data) {
+                    $('#hapus_semua').modal('hide');
                     $('#data').html('');
                     show_data();
                 }

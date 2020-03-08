@@ -87,7 +87,7 @@
 
         function show_data() {
             $.ajax({
-                type: 'ajax',
+                type: 'post',
                 url: '<?php echo site_url('profile/getData') ?>',
                 async: false,
                 dataType: 'json',

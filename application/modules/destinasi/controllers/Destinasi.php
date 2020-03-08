@@ -22,10 +22,11 @@ class Destinasi extends MY_Controller
 		$i = $_POST['start'];
 		foreach ($memData as $member) {
 			$i++;
+			$foto="<img src='".base_url('assets/img/foto/').$member->foto."' width='100px'>";
 			$upload = "<a href='" . site_url('destinasi/galeri/') . $member->id_destinasi . "' class='btn btn-info' ><i class='fas fa-fw fa-eye'></i> Galeri</a>";
-			$btn_edit = '<a href="#" class="btn btn-warning edit"  data-nama_destinasi_edit="' . $member->nama_destinasi . '" data-id_destinasi="' . $member->id_destinasi . '"><i class="fas fa-fw fa-pen"></i> Edit</a>';
+			$btn_edit = '<a href="#" class="btn btn-warning edit"  data-nama_destinasi_edit="' . $member->nama_destinasi . '" data-id_destinasi="' . $member->id_destinasi . '" data-gambar_lama="' . $member->foto . '"><i class="fas fa-fw fa-pen"></i> Edit</a>';
 			$btn_hapus = '<a href="#" class="btn btn-danger hapus"  data-id_destinasi="' . $member->id_destinasi . '"><i class="fas fa-fw fa-trash"></i> Hapus</a>';
-			$data[] = array($i, $member->nama_destinasi, $upload, $btn_edit . ' ' . $btn_hapus);
+			$data[] = array($i, $member->nama_destinasi,$foto, $upload, $btn_edit . ' ' . $btn_hapus);
 		}
 
 		$output = array(
@@ -73,9 +74,10 @@ class Destinasi extends MY_Controller
 		$result = $this->model->hapus_gambar();
 		echo json_encode($result);
 	}
-	public function hapus_semua($id)
+	public function hapus_semua()
 	{
-		$result = $this->model->hapus_gambar($id);
+		$id = $this->input->post('id_destinasi');
+		$result = $this->model->hapus_semua($id);
 		echo json_encode($result);
 	}
 }

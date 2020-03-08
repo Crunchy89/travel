@@ -14,6 +14,15 @@
                         <label for="nama">Nama Destinasi</label>
                         <input type="text" name="nama" id="nama" class="form-control">
                     </div>
+                    <div class="form-group">
+                        <label for="gambar" id="reset"><img class="img-fluid" src="<?= base_url() ?>assets/img/noimage.png" id="output" width="200"></label>
+                    </div>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" accept="image/*" onchange="loadFile(event)" id="gambar" name="gambar">
+                            <label class="custom-file-label" for="exampleInputFile">Pilih Foto</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -39,7 +48,17 @@
                     <div class="form-group">
                         <label for="nama_edit">Nama Destinasi</label>
                         <input type="hidden" name="id" id="id_edit">
+                        <input type="hidden" name="gambarLama" id="gambarLama">
                         <input type="text" name="nama" id="nama_edit" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="gambar2" id="hasil"><img class="img-fluid" src="<?= base_url() ?>assets/img/noimage.png" id="output2" width="200"></label>
+                    </div>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" accept="image/*" onchange="loadFile2(event)" id="gambar2" name="gambar">
+                            <label class="custom-file-label" for="exampleInputFile">Ganti Foto</label>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
